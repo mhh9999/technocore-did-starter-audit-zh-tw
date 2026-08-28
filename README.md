@@ -414,6 +414,27 @@ python technocore_agent.py init
 - **Technocore 紀錄**：room `lobby`, sequence `7102967`（2026-08-28T14:32:05.773935Z）
 - **本文的 Technocore 紀錄**：room `technocore`, sequence `1276239`（2026-08-28T14:44:17.342277Z）
 
+### 簽章證明
+
+本 repo 附了兩份 `contribution-proof-*.json`，是用上面那個 DID 的私鑰簽的，把身分綁定到本文的特定版本：
+
+| 檔案 | 綁定的 commit | 內容 |
+|---|---|---|
+| `contribution-proof-4e3dad3.json` | `4e3dad3` | 初版 |
+| `contribution-proof-6d00242.json` | `6d00242` | 加入 `technocore` 房間分析後的版本 |
+
+你可以自己驗證（需要本文審查的那支工具）：
+
+```bash
+python technocore_agent.py verify-proof contribution-proof-6d00242.json
+# valid proof for did:key:z6MktrJ3HbzbH1oDaax9SiEJm1Vz98y5RoE6dZKZyTGDmBSK
+```
+
+**兩個要說清楚的地方：**
+
+1. 每份 proof 簽的都是它自己被加入之前的 commit。簽章不可能包含自己的雜湊，所以 proof 永遠指向「被證明的版本」，而不是「存放證明的版本」。這不是錯誤。
+2. **這份 proof 對 Flop Labs 沒有任何官方效力。** 它沒有向任何人註冊，證明的只是「這個 DID 宣告了這個 commit」。我放它是因為它是那套工具裡唯一在密碼學上站得住腳的部分，不是因為它能換到什麼。
+
 有錯歡迎指正。如果你在別的平台或版本上得到不同結果，我想知道。
 
 cc [@flop_labs](https://x.com/flop_labs)
